@@ -12,7 +12,6 @@ my_dict = {}
 gLogin = 'romantestbez@gmail.com'
 gPass = 'ababagalamaga'
 
-
 def random_text():
     return ''.join(random.choice(string.letters.lower() + string.digits * 3) for i in range(10))
 
@@ -30,6 +29,26 @@ def login():
         print ('Login FAILED')
         driver.close()
 
+def sendMail():
+    try:
+        income = len(driver.find_elements_by_css_selector('.zA'))
+        for a in range(mails_to_sent):
+            driver.find_element_by_xpath('//*[@class="T-I T-I-KE L3"]').click()
+            sleep(0.5)
+            driver.find_element_by_css_selector(".vO").send_keys(gLogin)
+            driver.find_element_by_css_selector(".aoT").send_keys(random_text())
+            driver.find_element_by_css_selector(".Am.Al.editable.LW-avf").send_keys(random_text())
+            driver.find_element_by_css_selector(".T-I.J-J5-Ji.aoO.T-I-atl.L3").click()
+        sleep(1)
+        newincome = len(driver.find_elements_by_css_selector('.zA'))
+        if ((newincome - mails_to_sent) == income):
+            print ('All {} mails received').format(mails_to_sent)
+            print ('Send mail PASS')
+        sendLastMail()
+    except:
+        print('Send mail FAILED')
+        driver.close()
+        
 def sendLastMail():
     try:
         driver.find_element_by_xpath('//*[@class="T-I T-I-KE L3"]').click()
@@ -61,25 +80,6 @@ def sendLastMail():
         print('Send last mail FAILED')
         driver.close()
 
-def sendMail():
-    try:
-        income = len(driver.find_elements_by_css_selector('.zA'))
-        for a in range(mails_to_sent):
-            driver.find_element_by_xpath('//*[@class="T-I T-I-KE L3"]').click()
-            sleep(0.5)
-            driver.find_element_by_css_selector(".vO").send_keys(gLogin)
-            driver.find_element_by_css_selector(".aoT").send_keys(random_text())
-            driver.find_element_by_css_selector(".Am.Al.editable.LW-avf").send_keys(random_text())
-            driver.find_element_by_css_selector(".T-I.J-J5-Ji.aoO.T-I-atl.L3").click()
-        sleep(1)
-        newincome = len(driver.find_elements_by_css_selector('.zA'))
-        if ((newincome - mails_to_sent) == income):
-            print ('All mail received')
-        print ('Send mail PASS')
-        sendLastMail()
-    except:
-        print('Send mail FAILED')
-        driver.close()
 
 def delete_mails():
     try:
