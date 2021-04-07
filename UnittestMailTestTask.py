@@ -63,7 +63,7 @@ class MailTestCase(unittest.TestCase):
 
         # Open sending popup window
         driver.find_element_by_xpath('//*[@class="T-I T-I-KE L3"]').click()
-        sleep(0.5)
+        sleep(1)
         driver.find_element_by_css_selector(".vO").send_keys(gLogin) #input self mail adress
         driver.find_element_by_css_selector(".aoT").send_keys("MailInfo") #input subject
 
