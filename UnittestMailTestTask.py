@@ -98,19 +98,11 @@ class MailTestCase(unittest.TestCase):
         driver.find_element_by_css_selector(".T-I.J-J5-Ji.aoO.T-I-atl.L3").click()
 
         # Delete all mails except last ------------------------------------------
-
-        j = 0
-        sleep(1)
-        # Find all check boxes
-        check = driver.find_elements_by_xpath("//*[@role='checkbox']")
-
-        # Idea - iterate start from checkbox "check all", click on it. Next checkbox last mail, click to uncheck last
-        # 2 click iterations and break
-        for i in check:
-            i.click()
-            j += 1
-            if (j == 2):
-                break
+        
+        # Checkbox "check all" click
+        driver.find_element_by_xpath('//div[@id=":28"]/div/span').click()
+        # Checkbox last mail uncheck
+        driver.find_element_by_xpath('//div[@class="Cp"]//tr/td/div').click()
 
         # Find delete button and click on it
         driver.find_element_by_xpath('//*[@class="T-I J-J5-Ji nX T-I-ax7 T-I-Js-Gs mA"]').click()
