@@ -37,7 +37,7 @@ class MailTestCase(unittest.TestCase):
         # Send self emails ------------------------------------------
 
         # Count inbox mails before sending
-        inbox = len(driver.find_elements_by_css_selector('.zA'))
+        inbox = len(driver.find_elements_by_xpath('//div[@class="aDP"]//tbody/tr'))
         # Start sending self mails in loop with mails_to_send variable
         for a in range(mails_to_send):
 
@@ -49,13 +49,13 @@ class MailTestCase(unittest.TestCase):
             # Send mails
             driver.find_element_by_xpath('//*[@class="T-I T-I-KE L3"]').click()
             sleep(1)
-            driver.find_element_by_css_selector(".vO").send_keys(gLogin) # input self mail "To"
-            driver.find_element_by_css_selector(".aoT").send_keys(random1) # input random in "Subject"
-            driver.find_element_by_css_selector(".Am.Al.editable.LW-avf").send_keys(random2) # input random in "Massage"
-            driver.find_element_by_css_selector(".T-I.J-J5-Ji.aoO.T-I-atl.L3").click() # Send mail
+            driver.find_element_by_xpath('//td[@class="eV"]/div/div/textarea').send_keys(gLogin) # input self mail "To"
+            driver.find_element_by_xpath('//form[@class="bAs"]/div[3]/div/input').send_keys(random1) # input random in "Subject"
+            driver.find_element_by_xpath('//td[@class="Ap"]/div[2]/div').send_keys(random2) # input random in "Massage"
+            driver.find_element_by_xpath('//td[@class="gU Up"]/div/div[2]/div').click() # Send mail
         sleep(1)
         # Count how many mails after sending
-        new_inbox = len(driver.find_elements_by_css_selector('.zA'))
+        new_inbox = len(driver.find_elements_by_xpath('//div[@class="aDP"]//tbody/tr'))
         # Check if all sent massages income
         self.assertEqual(new_inbox - mails_to_send, inbox)
 
@@ -64,11 +64,11 @@ class MailTestCase(unittest.TestCase):
         # Open sending popup window
         driver.find_element_by_xpath('//*[@class="T-I T-I-KE L3"]').click()
         sleep(1)
-        driver.find_element_by_css_selector(".vO").send_keys(gLogin) #input self mail adress
-        driver.find_element_by_css_selector(".aoT").send_keys("MailInfo") #input subject
+        driver.find_element_by_xpath('//td[@class="eV"]/div/div/textarea').send_keys(gLogin) #input self mail adress
+        driver.find_element_by_xpath('//form[@class="bAs"]/div[3]/div/input').send_keys("MailInfo") #input subject
 
         # Find all inbox mails
-        mails = driver.find_elements_by_css_selector('.zA')
+        mails = driver.find_elements_by_xpath('//div[@class="aDP"]//tbody/tr')
 
         # Iterate through mails to find subject and text
         for i in mails:
@@ -93,9 +93,9 @@ class MailTestCase(unittest.TestCase):
                    "It contains {} letters and {} numbers\n".format(k, v, len(letters), len(digits))
 
             # Input prepared text in massage box
-            driver.find_element_by_css_selector(".Am.Al.editable.LW-avf").send_keys(text)
+            driver.find_element_by_xpath('//td[@class="Ap"]/div[2]/div').send_keys(text)
             # Send mail
-        driver.find_element_by_css_selector(".T-I.J-J5-Ji.aoO.T-I-atl.L3").click()
+        driver.find_element_by_xpath('//td[@class="gU Up"]/div/div[2]/div').click()
 
         # Delete all mails except last ------------------------------------------
         
@@ -109,7 +109,7 @@ class MailTestCase(unittest.TestCase):
         sleep(1)  # rest a bit mail server no so fast:)
 
         # Check if we have only one massage left
-        self.assertEqual(len(driver.find_elements_by_css_selector('.zA')), 1)
+        self.assertEqual(len(driver.find_elements_by_xpath('//div[@class="aDP"]//tbody/tr')), 1)
 
     def tearDown(self):
         # Close web driver
